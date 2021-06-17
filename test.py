@@ -41,7 +41,7 @@ cidades = soup.find_all('span', class_=['sc-frDJqD cXlpPT'])
 
 list_precos = []
 for i in precos:
-    list_precos.append(i.get_text())
+    list_precos.append(float(i.get_text().replace("R$", "")))
 
 verify_zerokm_publicidade = []
 for i in precos_sugeridos:
@@ -69,6 +69,15 @@ for i in anomodelos:
     else:
         list_km.append(i.get_text())
     count += 1
+
+data = {'preco':list_precos, 'valid_preco':matching}
+
+df = pd.DataFrame(data)
+df = df[df['valid_preco'] == 1]
+
+df['modelo'] = list_modelos
+df['anomodelo'] = list_anomodelos
+df['quilometragem'] = list_km
 
 
 print('fim')
