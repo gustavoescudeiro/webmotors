@@ -31,21 +31,44 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 time.sleep(10)
 print('capturando')
-carros = soup.find_all('div', class_=['sc-cmthru jSUxTP'])
+#carros = soup.find_all('div', class_=['ContainerCardVehicle ads_align'])
+precos = soup.find_all('strong', class_=['sc-kvZOFW knsOia'])
+precos_sugeridos = soup.find_all('div', class_=['sc-hMFtBS cVTeoI'])
+modelos = soup.find_all('h3', class_=['sc-bbmXgH fEaLmM'])
+anomodelos = soup.find_all('span', class_=['sc-dNLxif xTPZF'])
+cidades = soup.find_all('span', class_=['sc-frDJqD cXlpPT'])
 
-for carro in carros:
-    print(carro)
-    preco = carro.find('strong', class_=['sc-kvZOFW knsOia']).get_text()
-    print(preco)
 
-    modelo = carro.find('h3', class_=['sc-bbmXgH fEaLmM']).get_text()
-    print(modelo)
+list_precos = []
+for i in precos:
+    list_precos.append(i.get_text())
 
-    anomodelo = carro.find('span', class_=['sc-dNLxif xTPZF']).get_text()
-    print(anomodelo)
+verify_zerokm_publicidade = []
+for i in precos_sugeridos:
+    verify_zerokm_publicidade.append(i.get_text())
 
-    cidade = carro.find('span', class_=['sc-frDJqD cXlpPT']).get_text()
-    print(cidade)
+matching = []
+for i in verify_zerokm_publicidade:
+    if 'preço sugerido' in i:
+        retorno = 0
+    else:
+        retorno = 1
+    matching.append(retorno)
+
+
+list_modelos = []
+for i in modelos:
+    list_modelos.append(i.get_text())
+
+count = 0
+list_anomodelos = []
+list_km = []
+for i in anomodelos:
+    if count % 2 == 0:
+        list_anomodelos.append(i.get_text())
+    else:
+        list_km.append(i.get_text())
+    count += 1
 
 
 print('fim')

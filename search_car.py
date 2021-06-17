@@ -145,6 +145,7 @@ def captura(driver):
             writer = csv.DictWriter(f, item.lista_de_item[0].keys())
             writer.writeheader()
             for d in item.lista_de_item:
+                print(d)
                 writer.writerow(d)
 
 
