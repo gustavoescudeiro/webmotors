@@ -46,7 +46,7 @@ for i in precos:
 
 list_links = []
 for i in links:
-    list_links.append(i.find('a', class_=['CardVehicle__linkPhoto'])['href'])
+    list_links.append(i.find('a', target=['_blank'])['href'])
 
 verify_zerokm_publicidade = []
 for i in precos_sugeridos:
@@ -79,6 +79,7 @@ data = {'preco': list_precos, 'valid_preco': matching}
 
 df = pd.DataFrame(data)
 df = df[df['valid_preco'] == 1]
+df.reset_index(drop = True, inplace = True)
 
 df['modelo'] = list_modelos
 df['anomodelo'] = list_anomodelos
