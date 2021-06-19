@@ -14,6 +14,15 @@ driver = webdriver.Chrome()
 driver.get(url)
 time.sleep(10)
 
+html = driver.page_source
+soup = BeautifulSoup(html, 'html.parser')
+button = soup.find('div', class_=['sc-bdVaJa bjRMar'])
+print(button)
+if not button is None:
+    btn = driver.find_element_by_css_selector('#root > div.sc-bdVaJa.bjRMar > div.sc-htpNat.iPWKQm > button')
+    btn.click()
+
+
 lenOfPage = driver.execute_script("window.scrollTo(0, document.body.scrollHeight);var lenOfPage=document.body.scrollHeight;return lenOfPage;")
 
 match = False
@@ -22,6 +31,15 @@ while (match == False):
     time.sleep(3)
     lenOfPage = driver.execute_script(
         "window.scrollTo(0, document.body.scrollHeight);var lenOfPage=document.body.scrollHeight;return lenOfPage;")
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    button = soup.find('div', class_=['ContainerButtons__details__buttons'])
+    print(button)
+    if not button is None:
+        btn = driver.find_element_by_css_selector('#ButtonCarriesMoreCars')
+        btn.click()
+
+
     print(lenOfPage, lastCount)
     if lastCount == lenOfPage:
         match = True
