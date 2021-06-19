@@ -33,7 +33,7 @@ time.sleep(10)
 print('capturando')
 #carros = soup.find_all('div', class_=['ContainerCardVehicle ads_align'])
 precos = soup.find_all('strong', class_=['sc-kvZOFW knsOia'])
-links = soup.find_all('div', class_=['PhotoSlider--container'])
+links = soup.find_all('div', class_=['sc-hMFtBS cVTeoI'])
 precos_sugeridos = soup.find_all('div', class_=['sc-hMFtBS cVTeoI'])
 modelos = soup.find_all('h3', class_=['sc-bbmXgH fEaLmM'])
 anomodelos = soup.find_all('span', class_=['sc-dNLxif xTPZF'])
@@ -75,7 +75,7 @@ for i in anomodelos:
         list_km.append(i.get_text())
     count += 1
 
-data = {'preco': list_precos, 'valid_preco': matching}
+data = {'link': list_links, 'preco': list_precos, 'valid_preco': matching}
 
 df = pd.DataFrame(data)
 df = df[df['valid_preco'] == 1]
@@ -84,7 +84,8 @@ df.reset_index(drop = True, inplace = True)
 df['modelo'] = list_modelos
 df['anomodelo'] = list_anomodelos
 df['quilometragem'] = list_km
-df['link'] = list_links
+
+
 
 
 print('fim')
