@@ -103,6 +103,7 @@ df['modelo'] = list_modelos
 df['anomodelo'] = list_anomodelos
 df['quilometragem'] = list_km
 
+df.to_csv('webmotors.csv', sep = ';', decimal = ',', index = False)
 
 
 
