@@ -72,7 +72,7 @@ novas_colunas = ["nao_identificado" if x == '' else x for x in novas_colunas]
 
 t.columns = novas_colunas
 
-t.to_csv('all_cars.csv', sep = ';', decimal = ',', encoding = 'utf-8')
+t.to_csv('all_cars.csv', sep = ';', decimal = ',', encoding = 'utf-8', index = False)
 
 
 
