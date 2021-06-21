@@ -52,6 +52,7 @@ for i in links:
         dataframe.set_index(['column'], inplace = True)
         dataframe = dataframe.T.reset_index(drop = False)
         dataframe.drop(['index'], axis = 1, inplace = True)
+        dataframe['link'] = i
 
     except:
         print('nope')
@@ -71,7 +72,7 @@ novas_colunas = ["nao_identificado" if x == '' else x for x in novas_colunas]
 
 t.columns = novas_colunas
 
-t.to_csv('all_cars.csv', sep = ';', decimal = ',')
+t.to_csv('all_cars.csv', sep = ';', decimal = ',', encoding = 'utf-8')
 
 
 
