@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 import time
+from unidecode import unidecode
 
 df = pd.read_csv('webmotors.csv', sep = ';', decimal = ',')
 links = df['link']
 
-dic_infos = {}
+list_df = []
 for i in links:
     driver = webdriver.Chrome()
     driver.get(i)
@@ -48,13 +49,29 @@ for i in links:
         driver.quit()
         data = {'column': list_title, 'value': list_value}
         dataframe = pd.DataFrame(data)
+        dataframe.set_index(['column'], inplace = True)
+        dataframe = dataframe.T.reset_index(drop = False)
+        dataframe.drop(['index'], axis = 1, inplace = True)
+
     except:
         print('nope')
 
 
-    dic_infos[i] = dataframe
+    list_df.append(dataframe)
 
 
+t = pd.concat(list_df, axis = 0).reset_index(drop = True)
+colunas = t.columns.str.lower().str.replace(" ", "_").to_list()
+
+novas_colunas = []
+for i in colunas:
+    novas_colunas.append(unidecode(i))
+
+novas_colunas = ["nao_identificado" if x == '' else x for x in novas_colunas]
+
+t.columns = novas_colunas
+
+t.to_csv('all_cars.csv', sep = ';', decimal = ',')
 
 
 
