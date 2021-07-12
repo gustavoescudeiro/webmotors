@@ -12,7 +12,7 @@ list_df = []
 for i in links:
     driver = webdriver.Chrome()
     driver.get(i)
-    time.sleep(2)
+    time.sleep(1)
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')

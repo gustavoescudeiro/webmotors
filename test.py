@@ -8,7 +8,8 @@ from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
 import numpy as np
 
 
-url = 'https://www.webmotors.com.br/carros/sp-sao-paulo/hyundai/hb20?estadocidade=S%C3%A3o%20Paulo%20-%20S%C3%A3o%20Paulo&marca1=HYUNDAI&modelo1=HB20&idcmpint=t1:c17:m07:webmotors:modelo::hyundai%20hb20&autocomplete=hb2'
+url = 'https://www.webmotors.com.br/carros/sp-sao-paulo/hyundai/hb20?estadocidade=S%C3%A3o%20Paulo%20-%20S%C3%A3o%20Paulo&tipoveiculo=carros&localizacao=-23.5080536,-46.605199x0km&marca1=HYUNDAI&modelo1=HB20' \
+      ''
 
 driver = webdriver.Chrome()
 driver.get(url)
@@ -61,14 +62,17 @@ cidades = soup.find_all('span', class_=['sc-frDJqD cXlpPT'])
 list_precos = []
 for i in precos:
     list_precos.append(float(i.get_text().replace("R$", "")))
+    print(i.get_text())
 
 list_links = []
 for i in links:
     list_links.append(i.find('a', target=['_blank'])['href'])
+    print(i)
 
 verify_zerokm_publicidade = []
 for i in precos_sugeridos:
     verify_zerokm_publicidade.append(i.get_text())
+    print(i.get_text())
 
 matching = []
 for i in verify_zerokm_publicidade:
