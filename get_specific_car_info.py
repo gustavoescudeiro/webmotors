@@ -13,7 +13,15 @@ def get_car_info(url_car_list = []):
     list_df = []
     links = url_car_list
     for i in links:
-        driver = webdriver.Chrome()
+        
+        options = Options()
+        options.add_argument("window-size=1400,600")
+        from fake_useragent import UserAgent
+        ua = UserAgent()
+        a = ua.random
+        user_agent = ua.random
+        options.add_argument(f'user-agent={user_agent}')
+        driver = webdriver.Chrome(chrome_options=options)
         driver.get(i)
         time.sleep(1)
 

@@ -3,10 +3,21 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 from datetime import datetime
+from selenium.webdriver.chrome.options import Options
 
 
 def get_all_cars(url):
-    driver = webdriver.Chrome()
+
+    options = Options()
+    options.add_argument("window-size=1400,600")
+    from fake_useragent import UserAgent
+    ua = UserAgent()
+    a = ua.random
+    user_agent = ua.random
+    options.add_argument(f'user-agent={user_agent}')
+
+
+    driver = webdriver.Chrome(chrome_options=options)
     driver.get(url)
     time.sleep(10)
 
