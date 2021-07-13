@@ -4,6 +4,7 @@ import pandas as pd
 import time
 from unidecode import unidecode
 import numpy as np
+from datetime import datetime
 
 
 
@@ -122,5 +123,8 @@ def get_car_info(url_car_list = []):
 
     t.columns = novas_colunas
 
-    t.to_csv('more_info.csv', sep = ';', decimal = ',', encoding = 'utf-8', index = False)
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    hour_string = dt_string.split(" ")[1].replace(":", "")
+    t.to_csv(f'more_info{hour_string}.csv', sep = ';', decimal = ',', encoding = 'utf-8', index = False)
 
