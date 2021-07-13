@@ -2,6 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+from datetime import datetime
 
 
 def get_all_cars(url):
@@ -101,4 +102,8 @@ def get_all_cars(url):
     df['anomodelo'] = list_anomodelos
     df['quilometragem'] = list_km
 
-    df.to_csv('basic_info.csv', sep = ';', decimal = ',', index = False)
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    hour_string = dt_string.split(" ")[1].replace(":", "")
+
+    df.to_csv(f'basic_info_{hour_string}.csv', sep = ';', decimal = ',', index = False)
