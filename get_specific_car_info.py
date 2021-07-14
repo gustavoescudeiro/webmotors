@@ -5,7 +5,7 @@ import time
 from unidecode import unidecode
 import numpy as np
 from datetime import datetime
-
+from selenium.webdriver.chrome.options import Options
 
 
 def get_car_info(url_car_list = []):
@@ -13,7 +13,7 @@ def get_car_info(url_car_list = []):
     list_df = []
     links = url_car_list
     for i in links:
-        
+
         options = Options()
         options.add_argument("window-size=1400,600")
         from fake_useragent import UserAgent
